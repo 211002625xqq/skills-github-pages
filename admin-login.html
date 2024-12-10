@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理员登录页面</title>
+    <style>
+        /* 页面样式 */
+        body {
+            background-image: url("https://img1.baidu.com/it/u=1567828384,1817468331&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800"); 
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+        }
+
+        .login-container {
+            background: rgba(0, 0, 0, 0.6); /* 半透明黑色背景 */
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>管理员登录</h2>
+        <div class="form-group">
+            <label for="admin-name">姓名</label>
+            <input type="text" id="admin-name" placeholder="请输入姓名" required>
+        </div>
+        <div class="form-group">
+            <label for="admin-phone">手机号</label>
+            <input type="tel" id="admin-phone" placeholder="请输入手机号" required>
+        </div>
+        <div class="form-group">
+            <label for="admin-password">密码</label>
+            <input type="password" id="admin-password" placeholder="请输入密码" required>
+        </div>
+        <button onclick="adminLogin()">登录</button>
+    </div>
+
+    <script>
+        // 管理员登录逻辑
+        function adminLogin() {
+            var adminName = document.getElementById('admin-name').value;
+            var adminPhone = document.getElementById('admin-phone').value;
+            var adminPassword = document.getElementById('admin-password').value;
+
+            if (adminPassword === 'Admin@123') {
+                alert('管理员登录成功！');
+                window.location.href = 'admin.html';
+            } else {
+                alert('请填写完整的管理员信息！');
+            }
+        }
+    </script>
+
+</body>
+</html>

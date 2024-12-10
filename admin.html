@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>系统管理界面</title>
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f6f5ec;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+header {/*头部*/
+  background-color: #abc88b;
+  color: cadetblue;
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+  z-index: 1; 
+}
+
+nav {/*导航栏*/
+  background-color: #cde6c7;
+  color: orange;
+  width: 100px;
+  height: 100%;
+  position: fixed;
+  top: 100px;
+  left: 0;
+  box-sizing: border-box;
+  padding-top: 10px;
+}
+
+nav a {
+  color: steelblue;
+  display: block;
+  margin: 10px 0;
+  text-decoration: none;
+}
+
+nav a:hover {
+  background-color: #afb4db;
+  padding-left: 10px;
+}
+
+.content { /*内容区域*/
+  margin-left: 120px; /* 调整内容区域的宽度 */
+  padding: 20px;
+  flex-grow: 1;
+  margin-top: 50px; /* 给内容留出空间，避免与header重叠 */
+}
+
+    table {
+      width: 1000px;
+      margin-bottom: 20px;
+      border-collapse: collapse;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    button {
+      padding: 5px 10px;
+      margin: 5px;
+      cursor: pointer;
+    }
+    .data-table td {
+      cursor: pointer;
+      color: blue;
+    }
+  </style>
+</head>
+<body onload="showUserManagement()">
+
+  <header>
+    <h1>系统管理界面</h1>
+  </header>
+
+  <nav>
+    <a href="#" onclick="showUserManagement()">用户管理</a>
+    <a href="#" onclick="showDeviceManagement()">设备管理</a>
+  </nav>
+
+  <div class="content" id="content">
+    <!-- 用户管理内容会在这里显示 -->
+  </div>
+
+  <script>
+     // 模拟从数据库获取的用户数据
+  const userData = [
+    { name: '张三', phone: '13800000000', region: '001' },
+    { name: '李四', phone: '13900000000', region: '002' }
+  ];
+  
+  function showUserManagement() {
+    let tableContent = `
+      <h2>用户管理</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>用户姓名</th>
+            <th>手机号</th>
+            <th>区域号</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+    `;
+    
+    userData.forEach(user => {
+      tableContent += `
+        <tr>
+          <td>${user.name}</td>
+          <td>${user.phone}</td>
+          <td>${user.region}</td>
+          <td>
+            <button onclick="editRegion('${user.region}')">编辑区域号</button>
+            <button onclick="deleteUser('${user.name}')">删除信息</button>
+          </td>
+        </tr>
+      `;
+    });
+    
+    tableContent += `
+        </tbody>
+      </table>
+    `;
+    
+    document.getElementById('content').innerHTML = tableContent;
+    }
+
+    function showDeviceManagement() {
+      document.getElementById('content').innerHTML = `
+        <h2>设备管理</h2>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>设备ID</th>
+              <th>区域号</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td onclick="viewDeviceData(1)">1</td>
+              <td>001</td>
+            </tr>
+            <tr>
+              <td onclick="viewDeviceData(2)">2</td>
+              <td>002</td>
+            </tr>
+            <tr>
+              <td onclick="viewDeviceData(3)">3</td>
+              <td>003</td>
+            </tr>
+            <tr>
+              <td onclick="viewDeviceData(4)">4</td>
+              <td>004</td>
+            </tr>
+            <tr>
+              <td onclick="viewDeviceData(5)">5</td>
+              <td>005</td>
+            </tr>
+            <tr>
+              <td onclick="viewDeviceData(6)">6</td>
+              <td>006</td>
+            </tr>
+            <tr>
+              <td onclick="viewDeviceData(7)">7</td>
+              <td>007</td>
+            </tr>
+            <tr>
+              <td onclick="viewDeviceData(8)">8</td>
+              <td>008</td>
+            </tr>
+            <tr>
+              <td onclick="viewDeviceData(9)">9</td>
+              <td>009</td>
+            </tr>
+          </tbody>
+        </table>
+      `;
+    }
+
+    function editRegion(region) {
+      alert('编辑区域号: ' + region);
+    }
+
+    function deleteUser(userName) {
+      if (confirm('确定要删除用户 ' + userName + ' 吗？')) {
+        alert('用户 ' + userName + ' 已删除');
+      }
+    }
+
+    function viewDeviceData(deviceId) {
+      document.getElementById('content').innerHTML = `
+        <h2>设备 ${deviceId} 数据展示</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th>数据</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2024-12-09 08:00</td>
+              <td>${Math.random().toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td>2024-12-09 08:05</td>
+              <td>${Math.random().toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td>2024-12-09 08:10</td>
+              <td>${Math.random().toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td>2024-12-09 08:15</td>
+              <td>${Math.random().toFixed(2)}</td>
+            </tr>
+          </tbody>
+        </table>
+        <button onclick="showDeviceManagement()">返回设备管理</button>
+      `;
+    }
+  </script>
+
+</body>
+</html>
